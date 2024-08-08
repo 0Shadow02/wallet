@@ -22,7 +22,6 @@ export const authOptions = {
         if (!user || !user.email) {
           return false;
         }
-
         await db.merchant.upsert({
           select: {
             id: true

@@ -4,26 +4,25 @@ import prisma from "@repo/db/client"
 import { authOptions } from "./auth"
 
 export async function createOnRamptransaction(amount:number, provider:string){
-     const seesion = await getServerSession(authOptions)
-     const userId = seesion.user.id
-     const token = Math.random().toString()
-    if (userId!) {
+    console.log(amount,provider)
+     const session = await getServerSession(authOptions)
+     const userId = session.user.id
+     if (!session?.user || !session.user?.id) {
         return {
-        message:"user not logged in!"
+            message: "Unauthenticated request"
         }
     }
-    console.log("hi")
+    const token = (Math.random() * 1000).toString();
     await prisma.onRampTransaction.create({
         data:{
-            userId: Number(userId),
+            userId: Number(session?.user?.id),
             amount:amount,
             provider:provider,
-            startTime: Date(),
+            startTime:new Date(),
             status: "Processing",
             token: token
         }
     })
-    console.log("hi")
     return {
         message:"onRampTransaction added"
     }

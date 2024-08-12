@@ -4,7 +4,7 @@ import { Card } from "@repo/ui/card";
 import { Select } from "@repo/ui/select";
 import { useState } from "react";
 import { TextInput } from "@repo/ui/textinput";
-import { createOnRamptransaction } from "../app/lib/createOnRamptxn";
+import { createOnRamptransaction } from "../app/lib/actions/createOnRamptxn";
 import { useSession } from "next-auth/react";
 import { authOptions } from "../app/lib/auth";
 
